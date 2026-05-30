@@ -1,7 +1,7 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from app.core.config import settings
-from app.api.routes import auth, search
+from app.api.routes import auth, search, playlist
 from app.core.redis import get_redis, close_redis
 
 @asynccontextmanager
@@ -19,6 +19,7 @@ app = FastAPI(
 
 app.include_router(auth.router, prefix="/api/v1")
 app.include_router(search.router, prefix="/api/v1")
+app.include_router(playlist.router, prefix="/api/v1")
 
 @app.get("/health")
 async def health_check():
